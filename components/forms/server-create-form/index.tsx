@@ -2,22 +2,17 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 
 import { DialogFooter } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { formSchema } from './form-schema';
+import { formSchema } from './schema';
+import FileUploadField from './fields/fileUploadField';
+import InputField from './fields/inputField';
+import { FormValues } from './interface';
 
 const ServerCreateForm = () => {
-  const form = useForm({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -36,27 +31,12 @@ const ServerCreateForm = () => {
       <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
         <div className='space-y-8 px-6'>
           <div className='flex items-center justify-center text-center'>
-            Image Upload
+            <FileUploadField fieldName='imageUrl' control={form.control} />
           </div>
-          <FormField
-            name='name'
+          <InputField
+            fieldName='name'
             control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className='uppercase text-xs text-zinc-500 font-bold dark:text-secondary/70'>
-                  Server name
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className='border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0'
-                    disabled={isLoading}
-                    placeholder='Enter server name'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            isLoading={isLoading}
           />
         </div>
         <DialogFooter className='bg-gray-100 px-6 py-4'>
