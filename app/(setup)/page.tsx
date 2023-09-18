@@ -9,11 +9,15 @@ const SetupPage = async () => {
     const profile = await initialProfile();
     const server = await fetchServerForProfile(profile);
 
-    return server ? redirect(`servers/${server.id}`) : <InitialModal />;
+    if (server) {
+      return redirect(`/servers/${server.id}`);
+    }
   } catch (error) {
     console.error('Error in SetupPage:', error);
     return <div>An error occurred.</div>;
   }
+
+  return <InitialModal />;
 };
 
 export default SetupPage;

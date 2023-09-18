@@ -1,31 +1,12 @@
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-
 import { Form } from '@/components/ui/form';
-
 import { DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { formSchema } from './schema';
 import FileUploadField from './fields/fileUploadField';
 import InputField from './fields/inputField';
-import { FormValues } from './interface';
+import { useServerCreateForm } from './hooks/useServerCreateForm';
 
 const ServerCreateForm = () => {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      imageUrl: '',
-    },
-  });
-
-  const isLoading = form.formState.isSubmitting;
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
-
+  const { form, isLoading, onSubmit } = useServerCreateForm();
   return (
     <Form {...form}>
       <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
