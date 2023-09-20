@@ -2,9 +2,9 @@ import { db } from '@/lib/db';
 
 import { ProfileProps } from '@/interfaces';
 
-export const fetchServerForProfile = async (profile: ProfileProps) => {
+export const fetchServersForProfile = async (profile: ProfileProps) => {
   try {
-    const server = await db.server.findFirst({
+    const servers = await db.server.findMany({
       where: {
         members: {
           some: {
@@ -13,9 +13,9 @@ export const fetchServerForProfile = async (profile: ProfileProps) => {
         },
       },
     });
-    return server;
+    return servers;
   } catch (error) {
-    console.error('Error fetching server:', error);
+    console.error('Error fetching servers:', error);
     throw error;
   }
 };

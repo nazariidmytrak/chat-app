@@ -1,5 +1,5 @@
 import { FormField, FormItem, FormControl } from '@/components/ui/form';
-import FileUpload from '@/components/file-upload';
+import FileUpload from '@/components/actions/file-upload';
 import { CommonFieldProps } from '../../interface';
 
 const FileUploadField = ({ fieldName, control }: CommonFieldProps) => {

@@ -5,19 +5,17 @@ import { initialProfile } from '@/lib/initial-profile';
 import { fetchServerForProfile } from '@/app/api/fetchServerForProfile';
 
 const SetupPage = async () => {
-  try {
-    const profile = await initialProfile();
-    const server = await fetchServerForProfile(profile);
+  const profile = await initialProfile();
 
-    if (server) {
-      return redirect(`/servers/${server.id}`);
-    }
-  } catch (error) {
-    console.error('Error in SetupPage:', error);
-    return <div>An error occurred.</div>;
+  if (!profile) {
+    return <InitialModal />;
   }
 
-  return <InitialModal />;
+  const server = await fetchServerForProfile(profile);
+
+  if (server) {
+    return redirect(`/servers/${server.id}`);
+  }
 };
 
 export default SetupPage;
