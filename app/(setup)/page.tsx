@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import InitialModal from '@/components/modals/initial-modal';
 import { initialProfile } from '@/lib/initial-profile';
-import { fetchServerForProfile } from '@/app/api/fetchServerForProfile';
+import { fetchInitialServer } from '@/app/api/server-queries';
 
 const SetupPage = async () => {
   const profile = await initialProfile();
@@ -11,7 +11,7 @@ const SetupPage = async () => {
     return <InitialModal />;
   }
 
-  const server = await fetchServerForProfile(profile);
+  const server = await fetchInitialServer(profile);
 
   if (server) {
     return redirect(`/servers/${server.id}`);

@@ -1,8 +1,8 @@
+import { Profile } from '@prisma/client';
+
 import { db } from '@/lib/db';
 
-import { ProfileProps } from '@/interfaces';
-
-export const fetchServersForProfile = async (profile: ProfileProps) => {
+export const fetchServersForMember = async (profile: Profile) => {
   try {
     const servers = await db.server.findMany({
       where: {

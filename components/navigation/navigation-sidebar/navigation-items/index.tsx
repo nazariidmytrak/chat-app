@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
+import { Server } from '@prisma/client';
 
-import { fetchServersForProfile } from '@/app/api/fetchServersForProfile';
+import { fetchServersForMember } from '@/app/api/server-queries';
 import { currentProfile } from '@/lib/current-profile';
 import NavigationItem from '../navigation-item';
-import { ServerProps } from '@/interfaces';
 
 const NavigationItems = async () => {
   const profile = await currentProfile();
@@ -12,11 +12,11 @@ const NavigationItems = async () => {
     return redirect('/');
   }
 
-  const servers = await fetchServersForProfile(profile);
+  const servers = await fetchServersForMember(profile);
 
   return (
     <div>
-      {servers.map((server: ServerProps) => (
+      {servers.map((server: Server) => (
         <div className='mb-4' key={server.id}>
           <NavigationItem
             id={server.id}
