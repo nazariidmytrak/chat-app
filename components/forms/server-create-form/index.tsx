@@ -5,8 +5,17 @@ import FileUploadField from './fields/fileUploadField';
 import InputField from './fields/inputField';
 import { useServerCreateForm } from './hooks/useServerCreateForm';
 
-const ServerCreateForm = () => {
-  const { form, isLoading, onSubmit } = useServerCreateForm();
+interface Props {
+  isInitialModal: boolean;
+  onClose: () => void;
+}
+
+const ServerCreateForm = ({ isInitialModal, onClose }: Props) => {
+  const { form, isLoading, onSubmit } = useServerCreateForm(
+    isInitialModal,
+    onClose
+  );
+
   return (
     <Form {...form}>
       <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>

@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import SharedModal from '../shared-modal';
+import CreateServerModal from '@/components/modals/create-server-modal';
 
-const InitialModal = () => {
+export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -14,7 +15,9 @@ const InitialModal = () => {
     return null;
   }
 
-  return <SharedModal isOpen={true} onClose={() => {}} isInitialModal={true} />;
+  return (
+    <>
+      <CreateServerModal />
+    </>
+  );
 };
-
-export default InitialModal;
