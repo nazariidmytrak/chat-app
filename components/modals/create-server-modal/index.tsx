@@ -1,18 +1,22 @@
 'use client';
 
 import { useModal } from '@/hooks/use-modal-store';
-import SharedModal from '../shared-modal';
+import { Modal } from '../modal';
+import ServerCreateForm from '@/components/forms/server-create-form';
 
 const CreateServerModal = () => {
   const { isOpen, type, onClose } = useModal();
   const isModalOpen = isOpen && type === 'createServer';
 
   return (
-    <SharedModal
+    <Modal
       isOpen={isModalOpen}
       onClose={onClose}
-      isInitialModal={false}
-    />
+      title='Customize Your Server'
+      description='Give your server personality with a name and an image. You can always change it later'
+    >
+      <ServerCreateForm isInitialModal={false} onClose={onClose} />
+    </Modal>
   );
 };
 

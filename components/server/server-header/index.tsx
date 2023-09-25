@@ -17,10 +17,7 @@ interface Props {
 }
 
 const ServerHeader = ({ server, role }: Props) => {
-  const isAdmin = role === MemberRole.ADMIN;
-  const isModerator = isAdmin || role === MemberRole.MODERATOR;
-  const menuItems = generateMenuItems(isModerator, isAdmin);
-
+  const menuItems = generateMenuItems(server, role);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='focus:outline-none' asChild>

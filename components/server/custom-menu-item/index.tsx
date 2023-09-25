@@ -2,7 +2,12 @@ import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { CustomMenuItemProps } from '@/types';
 
-const CustomMenuItem = ({ variant, Icon, text }: CustomMenuItemProps) => {
+const CustomMenuItem = ({
+  variant,
+  Icon,
+  text,
+  onClick,
+}: CustomMenuItemProps) => {
   return (
     <DropdownMenuItem
       className={cn(
@@ -10,6 +15,7 @@ const CustomMenuItem = ({ variant, Icon, text }: CustomMenuItemProps) => {
         variant === 'red' ? 'text-rose-500' : '',
         variant === 'indigo' ? 'text-indigo-600 dark:text-indigo-400' : ''
       )}
+      onClick={onClick}
     >
       {text}
       <Icon className='h-4 w-4 ml-auto' />

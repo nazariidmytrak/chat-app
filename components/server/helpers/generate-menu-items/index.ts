@@ -1,3 +1,4 @@
+import { MemberRole, Server } from '@prisma/client';
 import {
   UserPlus,
   Settings,
@@ -8,16 +9,25 @@ import {
 } from 'lucide-react';
 
 import { CustomMenuItemProps } from '@/types';
+import { useModal } from '@/hooks/use-modal-store';
 
 export const generateMenuItems = (
-  isModerator: boolean,
-  isAdmin: boolean
+  server?: Server,
+  role?: MemberRole
 ): (CustomMenuItemProps | 'separator')[] => {
+  const { onOpen } = useModal();
+  const isAdmin = role === MemberRole.ADMIN;
+  const isModerator = isAdmin || role === MemberRole.MODERATOR;
+  const isGuest = role === MemberRole.GUEST;
+
   const menuItems: (CustomMenuItemProps | 'separator')[] = [
     isModerator && {
       text: 'Invite people',
       Icon: UserPlus,
       variant: 'indigo',
+      onClick: () => {
+        onOpen('invite', { server });
+      },
     },
     isAdmin && {
       text: 'Server Settings',
@@ -31,7 +41,7 @@ export const generateMenuItems = (
       text: 'Create Channel',
       Icon: PlusCircle,
     },
-    isModerator ? 'separator' : ('separator' as 'separator'),
+    !isGuest && 'separator',
     isAdmin
       ? {
           text: 'Delete Server',

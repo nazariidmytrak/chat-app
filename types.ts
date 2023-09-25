@@ -9,4 +9,6 @@ export type CustomMenuItemProps = {
   text: string;
   Icon: LucideIcon;
   variant?: 'red' | 'indigo';
+  onClick?: () => {};
 };
+

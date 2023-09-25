@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
-import SharedModal from '../shared-modal';
+import { Modal } from '../modal';
+import ServerCreateForm from '@/components/forms/server-create-form';
+import { useModal } from '@/hooks/use-modal-store';
 
 const InitialModal = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const { onClose } = useModal();
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -14,7 +17,16 @@ const InitialModal = () => {
     return null;
   }
 
-  return <SharedModal isOpen={true} onClose={() => {}} isInitialModal={true} />;
+  return (
+    <Modal
+      isOpen={true}
+      onClose={() => {}}
+      title='Customize Your Server'
+      description='Give your server personality with a name and an image. You can always change it later'
+    >
+      <ServerCreateForm isInitialModal={true} onClose={onClose} />
+    </Modal>
+  );
 };
 
 export default InitialModal;
