@@ -1,20 +1,38 @@
+import { useEffect } from 'react';
+import { Server } from '@prisma/client';
+
 import { Form } from '@/components/ui/form';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import FileUploadField from './fields/fileUploadField';
 import InputField from './fields/inputField';
-import { useServerCreateForm } from './hooks/useServerCreateForm';
+import { useServerForm } from './hooks/use-server-form';
 
 interface Props {
+  buttonLabel: string;
   isInitialModal: boolean;
   onClose: () => void;
+  server?: Server;
 }
 
-const ServerCreateForm = ({ isInitialModal, onClose }: Props) => {
-  const { form, isLoading, onSubmit } = useServerCreateForm(
+const ServerForm = ({
+  isInitialModal,
+  onClose,
+  buttonLabel,
+  server,
+}: Props) => {
+  const { form, isLoading, onSubmit } = useServerForm({
     isInitialModal,
-    onClose
-  );
+    onClose,
+    server,
+  });
+
+  useEffect(() => {
+    if (server) {
+      form.setValue('name', server.name);
+      form.setValue('imageUrl', server.imageUrl);
+    }
+  }, [server, form]);
 
   return (
     <Form {...form}>
@@ -31,7 +49,7 @@ const ServerCreateForm = ({ isInitialModal, onClose }: Props) => {
         </div>
         <DialogFooter className='bg-gray-100 px-6 py-4'>
           <Button variant='primary' disabled={isLoading}>
-            Create
+            {buttonLabel}
           </Button>
         </DialogFooter>
       </form>
@@ -39,4 +57,4 @@ const ServerCreateForm = ({ isInitialModal, onClose }: Props) => {
   );
 };
 
-export default ServerCreateForm;
+export default ServerForm;

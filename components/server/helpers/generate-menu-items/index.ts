@@ -32,6 +32,9 @@ export const generateMenuItems = (
     isAdmin && {
       text: 'Server Settings',
       Icon: Settings,
+      onClick: () => {
+        onOpen('editServer', { server });
+      },
     },
     isAdmin && {
       text: 'Manage Members',

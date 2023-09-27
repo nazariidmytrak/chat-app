@@ -4,9 +4,11 @@ import { useModal } from '@/hooks/use-modal-store';
 import { Modal } from '../modal';
 import ServerForm from '@/components/forms/server-form';
 
-const CreateServerModal = () => {
-  const { isOpen, type, onClose } = useModal();
-  const isModalOpen = isOpen && type === 'createServer';
+const EditServerModal = () => {
+  const { isOpen, type, onClose, data } = useModal();
+  const isModalOpen = isOpen && type === 'editServer';
+
+  const { server } = data;
 
   return (
     <Modal
@@ -18,10 +20,11 @@ const CreateServerModal = () => {
       <ServerForm
         isInitialModal={false}
         onClose={onClose}
-        buttonLabel='Create'
+        buttonLabel='Save'
+        server={server}
       />
     </Modal>
   );
 };
 
-export default CreateServerModal;
+export default EditServerModal;

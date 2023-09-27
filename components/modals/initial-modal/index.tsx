@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { Modal } from '../modal';
-import ServerCreateForm from '@/components/forms/server-create-form';
+import ServerForm from '@/components/forms/server-form';
 import { useModal } from '@/hooks/use-modal-store';
 
 const InitialModal = () => {
@@ -24,7 +24,11 @@ const InitialModal = () => {
       title='Customize Your Server'
       description='Give your server personality with a name and an image. You can always change it later'
     >
-      <ServerCreateForm isInitialModal={true} onClose={onClose} />
+      <ServerForm
+        isInitialModal={true}
+        onClose={onClose}
+        buttonLabel='Create'
+      />
     </Modal>
   );
 };
