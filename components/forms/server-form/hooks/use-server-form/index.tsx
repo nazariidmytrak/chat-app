@@ -7,6 +7,7 @@ import { Server } from '@prisma/client';
 
 import { FormValues } from '@/components/forms/server-form/interface';
 import { formSchema } from '@/components/forms/server-form/schema';
+import { useToast } from '@/components/ui/use-toast';
 
 interface Props {
   isInitialModal: boolean;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const useServerForm = ({ isInitialModal, onClose, server }: Props) => {
+  const { toast } = useToast();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,6 +32,9 @@ export const useServerForm = ({ isInitialModal, onClose, server }: Props) => {
     try {
       if (server) {
         await axios.patch(`/api/servers/${server.id}`, values);
+        toast({
+          title: 'Server info changed!',
+        });
       } else {
         const response = await axios.post('/api/servers', values);
         const serverId = response.data.id;
