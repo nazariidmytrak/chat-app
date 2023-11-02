@@ -9,54 +9,61 @@ import {
 } from 'lucide-react';
 
 import { CustomMenuItemProps } from '@/types';
-import { useModal } from '@/hooks/use-modal-store';
 
 export const generateMenuItems = (
+  onOpen?: any,
   server?: Server,
   role?: MemberRole
 ): (CustomMenuItemProps | 'separator')[] => {
-  const { onOpen } = useModal();
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
   const isGuest = role === MemberRole.GUEST;
 
-  const menuItems: (CustomMenuItemProps | 'separator')[] = [
-    isModerator && {
+  const menuOptions: Record<string, CustomMenuItemProps> = {
+    invite: {
       text: 'Invite people',
       Icon: UserPlus,
       variant: 'indigo',
-      onClick: () => {
-        onOpen('invite', { server });
-      },
+      onClick: () => onOpen('invite', { server }),
     },
-    isAdmin && {
+    settings: {
       text: 'Server Settings',
       Icon: Settings,
-      onClick: () => {
-        onOpen('editServer', { server });
-      },
+      onClick: () => onOpen('editServer', { server }),
     },
-    isAdmin && {
+    manageMembers: {
       text: 'Manage Members',
       Icon: UsersIcon,
+      onClick: () => onOpen('members', { server }),
     },
-    isModerator && {
+    createChannel: {
       text: 'Create Channel',
       Icon: PlusCircle,
     },
-    !isGuest && 'separator',
-    isAdmin
-      ? {
-          text: 'Delete Server',
-          Icon: Trash,
-          variant: 'red',
-        }
-      : {
-          text: 'Leave Server',
-          Icon: LogOut,
-          variant: 'red',
-        },
-  ].filter(Boolean) as (CustomMenuItemProps | 'separator')[];
+    deleteServer: {
+      text: 'Delete Server',
+      Icon: Trash,
+      variant: 'red',
+    },
+    leaveServer: {
+      text: 'Leave Server',
+      Icon: LogOut,
+      variant: 'red',
+    },
+  };
 
-  return menuItems;
+  const order = isAdmin
+    ? [
+        'invite',
+        'settings',
+        'manageMembers',
+        'createChannel',
+        'separator',
+        'deleteServer',
+      ]
+    : isModerator
+    ? ['invite', 'createChannel', 'separator', 'leaveServer']
+    : ['leaveServer'];
+
+  return order.map((item) => (item === 'separator' ? item : menuOptions[item]));
 };

@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ServerWithMembersWithProfiles } from '@/types';
-import { generateMenuItems, renderMenuItems } from '../helpers';
+import ServerMenuItems from './server-menu-items';
 
 interface Props {
   server: ServerWithMembersWithProfiles;
@@ -17,7 +17,6 @@ interface Props {
 }
 
 const ServerHeader = ({ server, role }: Props) => {
-  const menuItems = generateMenuItems(server, role);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='focus:outline-none' asChild>
@@ -27,7 +26,7 @@ const ServerHeader = ({ server, role }: Props) => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56 space-y-[2px] text-xs font-medium text-black dark:text-neutral-400'>
-        {renderMenuItems(menuItems)}
+        <ServerMenuItems server={server} role={role} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
