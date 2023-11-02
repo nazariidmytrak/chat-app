@@ -18,7 +18,7 @@ const ServerIdLayout = async ({ children, params }: Props) => {
     return redirectToSignIn();
   }
 
-  const server = fetchServerByIdForMember(profile, params.serverId);
+  const server = await fetchServerByIdForMember(profile, params.serverId);
 
   if (!server) {
     return redirect('/');
@@ -26,7 +26,7 @@ const ServerIdLayout = async ({ children, params }: Props) => {
 
   return (
     <div className='h-full'>
-      <div className='fixed hidden h-full w-60 z-20 flex-col inset-y-0 md:flex'>
+      <div className='fixed h-full w-60 z-20 flex-col inset-y-0 md:flex'>
         <ServerSidebar serverId={params.serverId} />
       </div>
       <main className='h-full md:pl-60'>{children}</main>

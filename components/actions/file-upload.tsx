@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { UploadDropzone } from '@/lib/uploadthing';
-import '@uploadthing/react/styles.css';
 
 interface Props {
   value: string;
@@ -13,6 +12,7 @@ interface Props {
 
 const FileUpload = ({ value, onChange, endpoint }: Props) => {
   const fileType = value?.split('.').pop();
+
   if (value && fileType !== 'pdf') {
     return (
       <div className='relative h-20 w-20'>
