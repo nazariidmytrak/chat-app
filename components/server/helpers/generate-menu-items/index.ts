@@ -39,6 +39,7 @@ export const generateMenuItems = (
     createChannel: {
       text: 'Create Channel',
       Icon: PlusCircle,
+      onClick: () => onOpen('createChannel', { server }),
     },
     deleteServer: {
       text: 'Delete Server',

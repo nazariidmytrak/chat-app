@@ -5,7 +5,7 @@ import { Form } from '@/components/ui/form';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import FileUploadField from './fields/fileUploadField';
-import InputField from './fields/inputField';
+import InputField from '../shared/fields/inputField';
 import { useServerForm } from './hooks/use-server-form';
 
 interface Props {
@@ -42,6 +42,8 @@ const ServerForm = ({
             <FileUploadField fieldName='imageUrl' control={form.control} />
           </div>
           <InputField
+            placeholder='Enter server name'
+            label='Server name'
             fieldName='name'
             control={form.control}
             isLoading={isLoading}
