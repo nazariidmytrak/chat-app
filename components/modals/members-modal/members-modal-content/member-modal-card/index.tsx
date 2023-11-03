@@ -1,4 +1,3 @@
-import React from 'react';
 import { ShieldCheck, ShieldAlert } from 'lucide-react';
 import { UserAvatar } from './user-avatar';
 
@@ -21,6 +20,7 @@ const MemberCard = ({ member }: { member: Member }) => {
   return (
     <div className='flex items-center gap-x-2 mb-6 relative'>
       <UserAvatar src={member.profile.imageUrl} />
+
       <div className='flex flex-col gap-y-1'>
         <div className='flex items-center gap-x-1 text-xs font-semibold'>
           {member.profile.name}

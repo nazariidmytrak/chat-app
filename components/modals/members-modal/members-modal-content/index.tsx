@@ -82,7 +82,7 @@ const MembersModalContent = ({
                           }}
                         >
                           <ShieldCheck className='h-4 w-4 mr-2' />
-                          Moderator
+                          <span className='pr-1'>Moderator</span>
                           {member.role === 'MODERATOR' && (
                             <Check className='h-4 w-4 ml-auto' />
                           )}

@@ -1,8 +1,14 @@
+import { Control } from 'react-hook-form';
+
 import { FormField, FormItem, FormControl } from '@/components/ui/form';
 import FileUpload from '@/components/actions/file-upload';
-import { CommonFieldProps } from '../../interface';
 
-const FileUploadField = ({ fieldName, control }: CommonFieldProps) => {
+interface Props {
+  fieldName: string;
+  control: Control;
+}
+
+const FileUploadField = ({ fieldName, control }: Props) => {
   return (
     <FormField
       name={fieldName}
