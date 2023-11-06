@@ -45,11 +45,13 @@ export const generateMenuItems = (
       text: 'Delete Server',
       Icon: Trash,
       variant: 'red',
+      onClick: () => onOpen('deleteServer', { server }),
     },
     leaveServer: {
       text: 'Leave Server',
       Icon: LogOut,
       variant: 'red',
+      onClick: () => onOpen('leaveServer', { server }),
     },
   };
 
