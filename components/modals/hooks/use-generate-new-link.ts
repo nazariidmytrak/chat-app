@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Server } from '@prisma/client';
 
-import { ModalType, ModalData } from './use-modal-store';
+import { ModalType, ModalData } from '@/hooks/use-modal-store';
 
 interface Props {
   server: Server;

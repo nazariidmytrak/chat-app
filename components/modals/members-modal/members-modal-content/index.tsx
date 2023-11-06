@@ -7,9 +7,9 @@ import {
   ShieldQuestion,
   UserX,
 } from 'lucide-react';
+import { ServerWithMembersWithProfiles } from '@/types';
 
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ServerWithMembersWithProfiles } from '@/types';
 
 import {
   DropdownMenu,
@@ -23,7 +23,7 @@ import {
   DropdownMenuSubTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { useMemberActions } from '@/hooks/use-member-actions';
+import { useMemberActions } from '@/components/modals/hooks/use-member-actions';
 import MemberCard from './member-modal-card';
 
 const MembersModalContent = ({

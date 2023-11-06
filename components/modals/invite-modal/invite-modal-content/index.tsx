@@ -7,8 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useOrigin } from '@/hooks/use-origin';
-import { useClipboard } from '@/hooks/use-clipboard';
-import { useGenerateNewLink } from '@/hooks/use-generate-new-link';
+import { useClipboard } from '@/components/modals/hooks/use-clipboard';
+import { useGenerateNewLink } from '@/components/modals/hooks/use-generate-new-link';
 import { ModalType, ModalData } from '@/hooks/use-modal-store';
 
 interface Props {

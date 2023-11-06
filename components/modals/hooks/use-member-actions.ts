@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { MemberRole } from '@prisma/client';
 
-import { useModal } from './use-modal-store';
+import { useModal } from '../../../hooks/use-modal-store';
 import { useToast } from '@/components/ui/use-toast';
 
 export function useMemberActions() {

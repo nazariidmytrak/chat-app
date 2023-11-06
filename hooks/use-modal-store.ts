@@ -6,7 +6,9 @@ export type ModalType =
   | 'invite'
   | 'editServer'
   | 'members'
-  | 'createChannel';
+  | 'createChannel'
+  | 'leaveServer'
+  | 'deleteServer';
 
 export type ModalData = {
   server?: Server;
