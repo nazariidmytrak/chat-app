@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogContent,
   DialogDescription,
+  DialogFooter,
 } from '@/components/ui/dialog';
 
 interface Props {
@@ -13,7 +14,8 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
-  description?: string;
+  description?: string | ReactNode;
+  footer?: any;
 }
 
 export const Modal: FC<Props> = ({
@@ -22,6 +24,7 @@ export const Modal: FC<Props> = ({
   title,
   children,
   description,
+  footer,
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -37,6 +40,11 @@ export const Modal: FC<Props> = ({
           )}
         </DialogHeader>
         {children}
+        {footer && (
+          <DialogFooter className='bg-gray-100 px-6 py-4'>
+            {footer}
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );
