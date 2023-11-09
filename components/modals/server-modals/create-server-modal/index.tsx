@@ -1,7 +1,7 @@
 'use client';
 
 import { useModal } from '@/hooks/use-modal-store';
-import { Modal } from '../../modal';
+import { Modal } from '@/components/modals/modal';
 import ServerForm from '@/components/forms/server-form';
 
 const CreateServerModal = () => {

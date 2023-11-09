@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { InputFieldProps } from '../../interface';
+import { InputFieldProps } from '@/components/forms/shared/interface';
 import { FieldValues } from 'react-hook-form';
 
 const InputField = <T extends FieldValues>({

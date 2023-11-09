@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ChannelType } from '@prisma/client';
 
-import { FormValues } from '../../interface';
-import { formSchema } from '../../schema';
+import { FormValues } from '@/components/forms/channel-form/interface';
+import { formSchema } from '@/components/forms/channel-form/schema';
 import { useToast } from '@/components/ui/use-toast';
 
 interface Props {

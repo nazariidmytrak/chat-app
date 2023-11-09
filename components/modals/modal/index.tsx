@@ -15,7 +15,7 @@ interface Props {
   onClose: () => void;
   children: ReactNode;
   description?: string | ReactNode;
-  footer?: any;
+  footer?: ReactNode;
 }
 
 export const Modal: FC<Props> = ({
