@@ -1,7 +1,7 @@
-import { Member } from '@prisma/client';
+import { MemberWithProfile } from '@/types';
 
 export const filterMembersByProfileId = (
-  members: Member[],
+  members: MemberWithProfile[],
   profileId: string
 ) => {
   return members.filter((member) => member.profileId !== profileId);

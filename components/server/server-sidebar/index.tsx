@@ -1,31 +1,29 @@
 import { redirect } from 'next/navigation';
 
-import { currentProfile } from '@/lib/current-profile';
 import ServerHeader from './server-header';
-import { fetchServerWithDetails } from '@/app/api/server-queries';
-import {
-  filterChannels,
-  filterMembersByProfileId,
-  findRoleByProfileId,
-} from '../helpers';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import ServerSearch from './server-search';
+import useServerData from '../hooks/use-server-data';
+import { ServerWithMembersWithProfiles } from '@/types';
 
 const ServerSidebar = async ({ serverId }: { serverId: string }) => {
-  const profile = await currentProfile();
-  const server = await fetchServerWithDetails(serverId);
+  const { server, profile, channelData, role } = await useServerData(serverId);
 
   if (!profile || !server) {
     return redirect('/');
   }
 
-  const { textChannels, audioChannels, videoChannels } = filterChannels(
-    server.channels
-  );
-  const members = filterMembersByProfileId(server.members, profile.id);
-  const role = findRoleByProfileId(server.members, profile.id);
-
   return (
     <div className=' hidden md:flex flex-col h-full w-full text-primary bg-[#f2f3f5] dark:bg-[#2b2d31]'>
-      <ServerHeader server={server} role={role} />
+      <ServerHeader
+        server={server as ServerWithMembersWithProfiles}
+        role={role}
+      />
+      <ScrollArea className='flex-1 px-3'>
+        <div className='mt-2'>
+          <ServerSearch channelData={channelData} />
+        </div>
+      </ScrollArea>
     </div>
   );
 };

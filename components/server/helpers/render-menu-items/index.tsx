@@ -1,6 +1,6 @@
 import { CustomMenuItemProps } from '@/types';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import CustomMenuItem from '../../custom-menu-item';
+import CustomMenuItem from '@/components/server/server-sidebar/server-header/server-menu-items/custom-menu-item';
 
 export const renderMenuItems = (
   menuItems: (CustomMenuItemProps | 'separator')[]
