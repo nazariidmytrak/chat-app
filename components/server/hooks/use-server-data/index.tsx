@@ -1,15 +1,20 @@
-import { MemberRole, Profile, Server } from '@prisma/client';
+import { Channel, Member, MemberRole, Profile } from '@prisma/client';
 
 import { currentProfile } from '@/lib/current-profile';
 import { fetchServerWithDetails } from '@/app/api/server-queries';
-import { getChannelData } from '@/components/server/helpers';
+import { filterChannels, getChannelData } from '@/components/server/helpers';
 import { ChannelDataProps } from '@/components/server/interface';
+import { MemberWithProfile, ServerWithMembersWithProfiles } from '@/types';
 
 const useServerData = async (
   serverId: string
 ): Promise<{
-  server: Server;
+  server: ServerWithMembersWithProfiles;
   profile: Profile;
+  members: MemberWithProfile[];
+  textChannels: Channel[];
+  videoChannels: Channel[];
+  audioChannels: Channel[];
   channelData: ChannelDataProps[];
   role: MemberRole;
 }> => {
@@ -29,15 +34,25 @@ const useServerData = async (
     role,
   } = getChannelData(server.channels, profile.id, members);
 
+  const { textChannels, videoChannels, audioChannels } = filterChannels(
+    server.channels
+  );
+
+  const channelData = [
+    { label: 'Text Channels', type: 'channel', data: textChannelData },
+    { label: 'Voice Channels', type: 'channel', data: audioChannelData },
+    { label: 'Video Channels', type: 'channel', data: videoChannelData },
+    { label: 'Members', type: 'member', data: membersData },
+  ];
+
   return {
     server,
+    members,
     profile,
-    channelData: [
-      { label: 'Text Channels', type: 'channel', data: textChannelData },
-      { label: 'Voice Channels', type: 'channel', data: audioChannelData },
-      { label: 'Video Channels', type: 'channel', data: videoChannelData },
-      { label: 'Members', type: 'member', data: membersData },
-    ],
+    textChannels,
+    videoChannels,
+    audioChannels,
+    channelData,
     role,
   };
 };

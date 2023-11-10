@@ -4,14 +4,19 @@ import { Button } from '@/components/ui/button';
 import InputField from '../shared/fields/inputField';
 import SelectField from './fields/select-field';
 import { useChannelForm } from './hooks/use-channel-form';
+import { ChannelType } from '@prisma/client';
 
 interface Props {
   buttonLabel: string;
   onClose: () => void;
+  channelType?: ChannelType;
 }
 
-const ChannelForm = ({ buttonLabel, onClose }: Props) => {
-  const { form, isLoading, onSubmit } = useChannelForm({ onClose });
+const ChannelForm = ({ buttonLabel, onClose, channelType }: Props) => {
+  const { form, isLoading, onSubmit } = useChannelForm({
+    onClose,
+    channelType,
+  });
   return (
     <Form {...form}>
       <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>

@@ -8,12 +8,14 @@ import { ChannelType } from '@prisma/client';
 import { FormValues } from '@/components/forms/channel-form/interface';
 import { formSchema } from '@/components/forms/channel-form/schema';
 import { useToast } from '@/components/ui/use-toast';
+import { useEffect } from 'react';
 
 interface Props {
   onClose: () => void;
+  channelType?: ChannelType;
 }
 
-export const useChannelForm = ({ onClose }: Props) => {
+export const useChannelForm = ({ onClose, channelType }: Props) => {
   const { toast } = useToast();
   const router = useRouter();
   const params = useParams();
@@ -22,9 +24,15 @@ export const useChannelForm = ({ onClose }: Props) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
     },
   });
+
+  useEffect(() => {
+    channelType
+      ? form.setValue('type', channelType)
+      : form.setValue('type', ChannelType.TEXT);
+  }, [channelType, form]);
 
   const isLoading = form.formState.isSubmitting;
 
