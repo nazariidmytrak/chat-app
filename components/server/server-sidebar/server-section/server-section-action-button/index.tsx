@@ -1,22 +1,26 @@
 import { ReactNode } from 'react';
 
 import ActionTooltip from '@/components/actions/action-tooltip';
+import { LucideIcon } from 'lucide-react';
 
 interface Props {
   label: string;
-  icon: ReactNode;
-  side: 'top' | 'left' | 'bottom' | 'right';
+  IconComponent: LucideIcon;
   onClick: () => void;
 }
 
-const ServerSectionActionButton = ({ label, side, onClick, icon }: Props) => {
+const ServerSectionActionButton = ({
+  label,
+  onClick,
+  IconComponent,
+}: Props) => {
   return (
-    <ActionTooltip label={label} side={side}>
+    <ActionTooltip label={label} side='top'>
       <button
         className='transition text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
         onClick={onClick}
       >
-        {icon}
+        <IconComponent className='h-4 w-4' />
       </button>
     </ActionTooltip>
   );

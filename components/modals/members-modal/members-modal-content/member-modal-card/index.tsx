@@ -1,5 +1,5 @@
 import { UserAvatar } from './user-avatar';
-import { RoleIconsMap } from '@/components/icons';
+import Icon from '@/components/icons';
 
 type Member = {
   profile: {
@@ -18,7 +18,7 @@ const MemberCard = ({ member }: { member: Member }) => {
       <div className='flex flex-col gap-y-1'>
         <div className='flex items-center gap-x-1 text-xs font-semibold'>
           {member.profile.name}
-          {RoleIconsMap[member.role]}
+          <Icon type={member.role} />
         </div>
         <p className='text-xs text-zinc-500'>{member.profile.email}</p>
       </div>

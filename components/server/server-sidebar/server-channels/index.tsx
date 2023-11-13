@@ -9,9 +9,16 @@ interface Props {
   role: MemberRole;
   server: ServerWithMembersWithProfiles;
   channelType: ChannelType;
+  label: string;
 }
 
-const ServerChannels = ({ channels, role, server, channelType }: Props) => {
+const ServerChannels = ({
+  channels,
+  role,
+  server,
+  channelType,
+  label,
+}: Props) => {
   if (!channels?.length) return null;
 
   return (
@@ -19,7 +26,7 @@ const ServerChannels = ({ channels, role, server, channelType }: Props) => {
       <ServerSection
         server={server}
         role={role}
-        label={`${channelType} Channels`}
+        label={label}
         sectionType='channels'
         channelType={channelType}
       />

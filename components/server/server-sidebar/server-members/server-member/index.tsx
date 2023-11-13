@@ -1,12 +1,12 @@
 'use client';
 
-import { MemberRole, Server } from '@prisma/client';
+import { Server } from '@prisma/client';
 import { useParams, useRouter } from 'next/navigation';
 
-import { RoleIconsMap } from '@/components/icons';
 import { UserAvatar } from '@/components/modals/members-modal/members-modal-content/member-modal-card/user-avatar';
 import { cn } from '@/lib/utils';
 import { MemberWithProfile } from '@/types';
+import Icon from '@/components/icons';
 
 interface Props {
   member: MemberWithProfile;
@@ -34,7 +34,7 @@ const ServerMember = ({ member, server }: Props) => {
         className='h-8 w-8 md:h-8 md:w-8'
       />
       <p className={textClasses}>{member.profile.name}</p>
-      {RoleIconsMap[member.role]}
+      <Icon type={member.role} />
     </button>
   );
 };

@@ -39,7 +39,7 @@ const ServerSearchCommand = ({
                     onSelect={() => onClick({ id, type })}
                   >
                     {icon}
-                    <span>{name}</span>
+                    <span className='max-w-[400px] truncate'>{name}</span>
                   </CommandItem>
                 );
               })}

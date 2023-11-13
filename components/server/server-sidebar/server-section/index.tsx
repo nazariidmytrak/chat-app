@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback } from 'react';
 import { MemberRole, ChannelType } from '@prisma/client';
 import { Plus, Settings } from 'lucide-react';
 
@@ -27,7 +28,14 @@ const ServerSection = ({
   const isAdmin = role === MemberRole.ADMIN;
   const isChannelSection = sectionType === 'channels';
   const isMemberSection = sectionType === 'members';
-  const iconStyles = 'h-4 w-4';
+
+  const handleCreateChannel = useCallback(() => {
+    onOpen('createChannel', { channelType });
+  }, [onOpen, channelType]);
+
+  const handleManageMembers = useCallback(() => {
+    onOpen('members', { server });
+  }, [onOpen, server]);
 
   return (
     <div className='flex items-center justify-between py-2'>
@@ -37,17 +45,15 @@ const ServerSection = ({
       {!isGuest && isChannelSection && (
         <ServerSectionActionButton
           label='Create Channel'
-          side='top'
-          icon={<Plus className={iconStyles} />}
-          onClick={() => onOpen('createChannel', { channelType })}
+          IconComponent={Plus}
+          onClick={handleCreateChannel}
         />
       )}
       {isAdmin && isMemberSection && (
         <ServerSectionActionButton
           label='Manage Members'
-          side='top'
-          icon={<Settings className={iconStyles} />}
-          onClick={() => onOpen('members', { server })}
+          IconComponent={Settings}
+          onClick={handleManageMembers}
         />
       )}
     </div>

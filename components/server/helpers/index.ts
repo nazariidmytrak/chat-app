@@ -1,4 +1,4 @@
-export * from './filter-channels';
+export * from './filter-channels-by-type';
 export * from './filter-members';
 export * from './find-role';
 export * from './generate-menu-items';

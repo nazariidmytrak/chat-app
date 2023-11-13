@@ -1,8 +1,8 @@
-import { RoleIconsMap } from '@/components/icons';
 import { MemberWithProfile } from '@/types';
+import Icon from '@/components/icons';
 
 export const mapMemberData = (member: MemberWithProfile) => ({
   id: member.id,
   name: member.profile.name,
-  icon: RoleIconsMap[member.role],
+  icon: <Icon type={member.role} />,
 });
